@@ -49,6 +49,41 @@ bool FX_bool_AggiungiCanzone (typeSTR_Canzone*& STR_p_Testa,const char* arr_cons
     return true; // Canzone aggiunta con successo
 }
 
+bool FX_bool_EliminaCanzone(typeSTR_Canzone*& STR_p_Testa,const char* arr_const_c_p_TitoloAlbum)
+{
+    typeSTR_Canzone* STR_p_Coda = STR_p_Testa;
+
+    while(STR_p_Coda->STR_p_PuntatoreProssimoElemento != nullptr)
+    {
+        if(STR_p_Coda->c_TitoloCanzone == arr_const_c_p_TitoloAlbum)
+        {
+            STR_p_Coda->STR_p_PuntatoreProssimoElemento = nullptr;
+            return true;
+        }
+        STR_p_Coda = STR_p_Coda->STR_p_PuntatoreProssimoElemento; // Passa al prossimo elemento
+    }
+    return false;
+}
+
+bool FX_bool_CercaCanzone(typeSTR_Canzone*& STR_p_Testa,const char* arr_const_c_p_TitoloAlbum) {
+    typeSTR_Canzone* STR_p_Coda = STR_p_Testa;
+
+    while(STR_p_Coda->STR_p_PuntatoreProssimoElemento != nullptr)
+    {
+        if(STR_p_Coda->c_TitoloCanzone == arr_const_c_p_TitoloAlbum)
+        {
+            return true;
+        }
+        STR_p_Coda = STR_p_Coda->STR_p_PuntatoreProssimoElemento; // Passa al prossimo elemento
+    }
+    return false;
+}
+
+bool FX_bool_DeletePlaylist(typeSTR_Canzone* STR_p_Testa)
+{
+    delete STR_p_Testa;
+}
+
 int main()
 {
     // Dichiarazione del puntatore alla testa della playlist
@@ -65,6 +100,17 @@ int main()
     FX_bool_AggiungiCanzone(STR_p_Canzone, "Waiting For Love (Avicii)"); // Tentativo di aggiungere un duplicato
 
     // Stampa la playlist aggiornata
+    FX_void_StampaPlaylist(STR_p_Canzone);
+
+    FX_bool_EliminaCanzone(STR_p_Canzone, "Waiting For Love (Avicii)");
+    FX_bool_EliminaCanzone(STR_p_Canzone, "Frio (Lazza)");
+
+    FX_void_StampaPlaylist(STR_p_Canzone);
+
+    cout << FX_bool_CercaCanzone(STR_p_Canzone, "Wake me up (Avicii)") << endl;
+    cout << FX_bool_CercaCanzone(STR_p_Canzone, "Waiting For Love (Avicii)") << endl;
+
+    FX_bool_DeletePlaylist(STR_p_Canzone);
     FX_void_StampaPlaylist(STR_p_Canzone);
 
     return 0; // Termina il programma
