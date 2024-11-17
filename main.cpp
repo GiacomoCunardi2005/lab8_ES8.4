@@ -10,12 +10,12 @@ struct typeSTR_Canzone
 };
 
 // Funzione per stampare l'intera playlist
-void FX_void_StampaPlaylist (typeSTR_Canzone* STR_p_Testa)
+void FX_void_StampaPlaylist (const typeSTR_Canzone* const_STR_p_Testa)
 {
     // Itera attraverso la lista finché il puntatore al prossimo elemento non è nullo
-    while(STR_p_Testa->STR_p_PuntatoreProssimoElemento != nullptr) {
-        cout << STR_p_Testa->c_TitoloCanzone << endl; // Stampa il titolo della canzone
-        STR_p_Testa = STR_p_Testa->STR_p_PuntatoreProssimoElemento; // Passa al prossimo elemento
+    while(const_STR_p_Testa->STR_p_PuntatoreProssimoElemento != nullptr) {
+        cout << const_STR_p_Testa->c_TitoloCanzone << endl; // Stampa il titolo della canzone
+        const_STR_p_Testa = const_STR_p_Testa->STR_p_PuntatoreProssimoElemento; // Passa al prossimo elemento
     }
 }
 
@@ -79,16 +79,15 @@ bool FX_bool_CercaCanzone(typeSTR_Canzone*& STR_p_Testa,const char* arr_const_c_
     return false;
 }
 
-bool FX_bool_DeletePlaylist(typeSTR_Canzone* STR_p_Testa)
+void FX_void_DeletePlaylist(const typeSTR_Canzone* const_STR_p_Testa)
 {
-    delete STR_p_Testa;
+    delete const_STR_p_Testa;
 }
 
 int main()
 {
     // Dichiarazione del puntatore alla testa della playlist
-    typeSTR_Canzone* STR_p_Canzone;
-    STR_p_Canzone = nullptr; // Inizialmente la lista è vuota
+    typeSTR_Canzone *STR_p_Canzone = nullptr; // Inizialmente la lista è vuota
 
     // Stampa la playlist inizialmente vuota
     FX_void_StampaPlaylist(STR_p_Canzone);
@@ -110,7 +109,7 @@ int main()
     cout << FX_bool_CercaCanzone(STR_p_Canzone, "Wake me up (Avicii)") << endl;
     cout << FX_bool_CercaCanzone(STR_p_Canzone, "Waiting For Love (Avicii)") << endl;
 
-    FX_bool_DeletePlaylist(STR_p_Canzone);
+    FX_void_DeletePlaylist(STR_p_Canzone);
     FX_void_StampaPlaylist(STR_p_Canzone);
 
     return 0; // Termina il programma
