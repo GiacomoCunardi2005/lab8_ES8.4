@@ -43,7 +43,7 @@ bool FX_bool_AggiungiCanzone (typeSTR_Canzone*& STR_p_Testa,const char* arr_cons
     STR_p_Testa = new typeSTR_Canzone; // Alloca memoria per il nuovo elemento
 
     // Qui si tenta di copiare il titolo nel nuovo nodo, ma c'è un errore logico
-    strcpy(STR_p_Testa->STR_p_PuntatoreProssimoElemento, arr_const_c_p_TitoloAlbum); // annot convert 'typeSTR_Canzone*' to 'char*'
+    strcpy(STR_p_Testa->c_TitoloCanzone, arr_const_c_p_TitoloAlbum); // cannot convert 'typeSTR_Canzone*' to 'char*'
     STR_p_Testa->STR_p_PuntatoreProssimoElemento = STR_p_Coda; // Collega il nuovo nodo alla lista esistente
 
     return true; // Canzone aggiunta con successo
